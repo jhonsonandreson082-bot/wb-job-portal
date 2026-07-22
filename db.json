@@ -67,6 +67,6 @@
   ],
   "admin": {
     "username": "admin",
-    "passwordHash": "node -e "const bcrypt=require('bcryptjs'); console.log(bcrypt.hashSync('Munnask1@#', 10));""
+    "passwordHash": "$2b$10$zfJbeEWL.XO5Gv/3iQ7Lw.j/N1fBRDAEvIWWh9tEFAqHfK0PmAK1a"
   }
 }
