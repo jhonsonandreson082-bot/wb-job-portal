@@ -87,6 +87,9 @@ app.get('/admin', requireLogin, (req, res) => {
   res.render('admin/dashboard', { jobs, sources, message: req.query.message || null });
 });
 
+views/admin/change-password.ejs
+views/admin/dashboard.ejs
+
 // Add job form
 app.get('/admin/jobs/new', requireLogin, (req, res) => {
   res.render('admin/edit', { job: null });
