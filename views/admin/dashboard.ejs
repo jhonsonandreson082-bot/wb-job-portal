@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - WB Job Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container admin-bar">
+      <h1>Admin Dashboard</h1>
+      <div>
+        <a href="/" target="_blank">সাইট দেখুন</a>
+        <a href="/admin/logout">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <% if (message) { %><p class="flash"><%= message %></p><% } %>
+
+    <section class="admin-section">
+      <div class="section-header">
+        <h2>চাকরির তালিকা (<%= jobs.length %>)</h2>
+        <a class="btn-primary" href="/admin/jobs/new">+ নতুন চাকরি যোগ করুন</a>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr><th>Title</th><th>Company</th><th>District</th><th>Posted</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          <% jobs.forEach(job => { %>
+            <tr>
+              <td><%= job.title %></td>
+              <td><%= job.company %></td>
+              <td><%= job.district %></td>
+              <td><%= job.postedDate %></td>
+              <td class="actions">
+                <a href="/admin/jobs/<%= job.id %>/edit">Edit</a>
+                <form method="POST" action="/admin/jobs/<%= job.id %>/delete" onsubmit="return confirm('মুছে ফেলতে চাও?');" style="display:inline">
+                  <button type="submit" class="link-danger">Delete</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="admin-section">
+      <div class="section-header">
+        <h2>Auto-fetch সোর্স (<%= sources.length %>)</h2>
+        <form method="POST" action="/admin/scrape">
+          <button type="submit" class="btn-primary">🔄 এখনই Scrape চালাও</button>
+        </form>
+      </div>
+      <table class="admin-table">
+        <thead><tr><th>Name</th><th>URL</th><th>District</th><th>Actions</th></tr></thead>
+        <tbody>
+          <% sources.forEach(s => { %>
+            <tr>
+              <td><%= s.name %></td>
+              <td><a href="<%= s.url %>" target="_blank"><%= s.url %></a></td>
+              <td><%= s.district %></td>
+              <td>
+                <form method="POST" action="/admin/sources/<%= s.id %>/delete" onsubmit="return confirm('সোর্স মুছে ফেলতে চাও?');">
+                  <button type="submit" class="link-danger">Remove</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <h3>নতুন সোর্স যোগ করো</h3>
+      <form method="POST" action="/admin/sources/new" class="source-form">
+        <input type="text" name="name" placeholder="সোর্সের নাম (e.g. Naukri WB)" required>
+        <input type="url" name="url" placeholder="https://..." required>
+        <input type="text" name="district" placeholder="জেলা (বা 'All Districts')" required>
+        <button type="submit" class="btn-secondary">যোগ করো</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

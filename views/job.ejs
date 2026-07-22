@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= job.title %> - West Bengal Job Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="back-link">← সব চাকরি দেখুন</a>
+      <h1><%= job.title %></h1>
+    </div>
+  </header>
+
+  <main class="container job-detail">
+    <div class="detail-card">
+      <p class="company-name"><%= job.company %></p>
+      <table class="detail-table">
+        <tr><td>জেলা</td><td><%= job.district %></td></tr>
+        <tr><td>স্থান</td><td><%= job.location %></td></tr>
+        <tr><td>বিভাগ</td><td><%= job.category %></td></tr>
+        <% if (job.vacancies) { %><tr><td>শূন্যপদ</td><td><%= job.vacancies %></td></tr><% } %>
+        <% if (job.qualification) { %><tr><td>যোগ্যতা</td><td><%= job.qualification %></td></tr><% } %>
+        <% if (job.salary) { %><tr><td>বেতন</td><td><%= job.salary %></td></tr><% } %>
+        <tr><td>পোস্ট হয়েছে</td><td><%= job.postedDate %></td></tr>
+        <tr><td>সূত্র</td><td><%= job.source %></td></tr>
+      </table>
+      <p class="description"><%= job.description %></p>
+      <a class="btn-primary big" href="<%= job.applyUrl %>" target="_blank" rel="noopener">অফিসিয়াল সাইটে গিয়ে আবেদন করুন →</a>
+      <p class="disclaimer">⚠️ আবেদন সরাসরি উপরের অফিসিয়াল লিঙ্কে গিয়ে করতে হবে। এই সাইট কোনো ব্যক্তিগত তথ্য সংগ্রহ করে না।</p>
+    </div>
+  </main>
+</body>
+</html>

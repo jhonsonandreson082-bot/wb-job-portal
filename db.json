@@ -1,0 +1,72 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "ITI Fitter",
+      "company": "Century Extrusions Ltd",
+      "district": "Paschim Medinipur",
+      "location": "Kharagpur",
+      "category": "Technical / ITI",
+      "vacancies": 12,
+      "qualification": "ITI (Fitter Trade)",
+      "salary": "₹12,000 - ₹15,000 / month",
+      "postedDate": "2026-07-10",
+      "source": "PACE Paschim Medinipur",
+      "sourceUrl": "https://pacepaschimmedinipur.co.in/",
+      "applyUrl": "https://pacepaschimmedinipur.co.in/",
+      "description": "Fitter required for manufacturing unit. ITI certificate mandatory."
+    },
+    {
+      "id": 2,
+      "title": "Security Guard",
+      "company": "Bengal Energy Ltd",
+      "district": "Paschim Medinipur",
+      "location": "Kharagpur",
+      "category": "Security",
+      "vacancies": 20,
+      "qualification": "Madhyamik Pass",
+      "salary": "₹9,500 - ₹11,000 / month",
+      "postedDate": "2026-07-12",
+      "source": "PACE Paschim Medinipur",
+      "sourceUrl": "https://pacepaschimmedinipur.co.in/",
+      "applyUrl": "https://pacepaschimmedinipur.co.in/",
+      "description": "Security personnel needed for factory premises, day and night shifts."
+    },
+    {
+      "id": 3,
+      "title": "Data Entry Operator",
+      "company": "WB Government - Employment Bank",
+      "district": "Uttar Dinajpur",
+      "location": "Raiganj",
+      "category": "Government / Clerical",
+      "vacancies": 8,
+      "qualification": "Graduate + Basic Computer Knowledge",
+      "salary": "As per govt norms",
+      "postedDate": "2026-07-15",
+      "source": "Employment Bank West Bengal",
+      "sourceUrl": "https://employmentbankwb.gov.in/",
+      "applyUrl": "https://employmentbankwb.gov.in/",
+      "description": "Data entry role at district office. Apply through official employment bank portal."
+    }
+  ],
+  "sources": [
+    {
+      "id": 1,
+      "name": "PACE Paschim Medinipur",
+      "url": "https://pacepaschimmedinipur.co.in/",
+      "district": "Paschim Medinipur",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Employment Bank West Bengal",
+      "url": "https://employmentbankwb.gov.in/",
+      "district": "All Districts",
+      "active": true
+    }
+  ],
+  "admin": {
+    "username": "admin",
+    "passwordHash": "$2b$10$zfJbeEWL.XO5Gv/3iQ7Lw.j/N1fBRDAEvIWWh9tEFAqHfK0PmAK1a"
+  }
+}

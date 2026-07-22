@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= job ? 'Edit Job' : 'New Job' %> - Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/admin" class="back-link">← Dashboard</a>
+      <h1><%= job ? 'চাকরি এডিট করো' : 'নতুন চাকরি যোগ করো' %></h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <form method="POST" action="<%= job ? '/admin/jobs/' + job.id + '/edit' : '/admin/jobs/new' %>" class="job-form">
+      <label>Job Title</label>
+      <input type="text" name="title" value="<%= job ? job.title : '' %>" required>
+
+      <label>Company</label>
+      <input type="text" name="company" value="<%= job ? job.company : '' %>" required>
+
+      <label>District</label>
+      <input type="text" name="district" value="<%= job ? job.district : '' %>" required>
+
+      <label>Location (Town/City)</label>
+      <input type="text" name="location" value="<%= job ? job.location : '' %>">
+
+      <label>Category</label>
+      <input type="text" name="category" value="<%= job ? job.category : '' %>" placeholder="e.g. Technical / ITI, Security, Government">
+
+      <label>Vacancies</label>
+      <input type="text" name="vacancies" value="<%= job ? job.vacancies : '' %>">
+
+      <label>Qualification</label>
+      <input type="text" name="qualification" value="<%= job ? job.qualification : '' %>">
+
+      <label>Salary</label>
+      <input type="text" name="salary" value="<%= job ? job.salary : '' %>">
+
+      <label>Posted Date</label>
+      <input type="date" name="postedDate" value="<%= job ? job.postedDate : '' %>">
+
+      <label>Source Name</label>
+      <input type="text" name="source" value="<%= job ? job.source : '' %>" placeholder="e.g. Employment Bank WB">
+
+      <label>Source URL</label>
+      <input type="url" name="sourceUrl" value="<%= job ? job.sourceUrl : '' %>">
+
+      <label>Official Apply URL</label>
+      <input type="url" name="applyUrl" value="<%= job ? job.applyUrl : '' %>" required>
+
+      <label>Description</label>
+      <textarea name="description" rows="4"><%= job ? job.description : '' %></textarea>
+
+      <button type="submit" class="btn-primary"><%= job ? 'Update' : 'Add' %> Job</button>
+    </form>
+  </main>
+</body>
+</html>

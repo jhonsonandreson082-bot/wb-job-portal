@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>West Bengal Job Portal - সব জেলার চাকরির খবর এক জায়গায়</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#0f4c81">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="WB Jobs">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>🇮🇳 West Bengal Job Portal</h1>
+      <p class="tagline">পশ্চিমবঙ্গের সমস্ত জেলার চাকরির খবর এক জায়গায় — সরাসরি অফিসিয়াল আবেদন লিঙ্ক সহ</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <form class="filters" method="GET" action="/">
+      <input type="text" name="q" placeholder="চাকরি বা কোম্পানির নাম খুঁজুন..." value="<%= q || '' %>">
+      <select name="district">
+        <option value="">সব জেলা</option>
+        <% districts.forEach(d => { %>
+          <option value="<%= d %>" <%= district === d ? 'selected' : '' %>><%= d %></option>
+        <% }) %>
+      </select>
+      <select name="category">
+        <option value="">সব ধরনের চাকরি</option>
+        <% categories.forEach(c => { %>
+          <option value="<%= c %>" <%= category === c ? 'selected' : '' %>><%= c %></option>
+        <% }) %>
+      </select>
+      <button type="submit">খুঁজুন</button>
+    </form>
+
+    <p class="result-count"><%= jobs.length %>টি চাকরি পাওয়া গেছে</p>
+
+    <div class="job-grid">
+      <% if (jobs.length === 0) { %>
+        <p>কোনো চাকরি পাওয়া যায়নি। অন্য কিছু দিয়ে খুঁজে দেখুন।</p>
+      <% } %>
+      <% jobs.forEach(job => { %>
+        <div class="job-card">
+          <div class="job-card-top">
+            <h3><%= job.title %></h3>
+            <span class="badge"><%= job.category %></span>
+          </div>
+          <p class="company"><%= job.company %></p>
+          <p class="meta">📍 <%= job.location %>, <%= job.district %></p>
+          <% if (job.salary) { %><p class="meta">💰 <%= job.salary %></p><% } %>
+          <p class="meta small">সূত্র: <%= job.source %> · <%= job.postedDate %></p>
+          <div class="job-card-actions">
+            <a class="btn-secondary" href="/job/<%= job.id %>">বিস্তারিত দেখুন</a>
+            <a class="btn-primary" href="<%= job.applyUrl %>" target="_blank" rel="noopener">অফিসিয়াল সাইটে আবেদন করুন →</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>এই সাইট শুধুমাত্র বিভিন্ন সরকারি ও বেসরকারি সূত্র থেকে চাকরির তথ্য সংগ্রহ করে একত্রে দেখায়। আবেদন সরাসরি সংশ্লিষ্ট অফিসিয়াল ওয়েবসাইটে গিয়ে করতে হবে। এই সাইট কোনো ব্যক্তিগত তথ্য সংগ্রহ করে না।</p>
+      <a href="/admin/login" class="admin-link">Admin Login</a>
+    </div>
+  </footer>
+
+  <button id="installBtn" class="install-btn" style="display:none;">📲 App হিসেবে Install করো</button>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').catch(console.error);
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'block';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
